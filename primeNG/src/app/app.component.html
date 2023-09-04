@@ -1,0 +1,39 @@
+<div class="flex flex-coulumn align-items-center justify-content-center">
+  <p-card header="todo " class="w-6">
+    <div class="m-2 flex">
+
+      <div>
+        <input type="text" pInputText [(ngModel)]="task"  #todoTask="ngModel" required/>
+
+      </div>
+      <p-button (onClick)="addTodo()" [disabled]="!!todoTask.invalid" icon="pi pi-check" class="ml-1"></p-button>
+    </div>
+
+
+    <p class="m-0">
+
+      <p-table [value]="todos" >
+        <ng-template pTemplate="header">
+          <tr>
+            <th width="60%">task</th>
+            <th>completed</th>
+            <th width="5%"></th>
+
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-todo>
+          <tr>
+            <td>{{ todo.task }}</td>
+            <td>
+              <p-checkbox (onChange)="updatedTodo($event , todo)" [(ngModel)]="todo.completed" [binary]="true"
+                inputId="binary"></p-checkbox>
+            </td>
+            <td><p-button (onClick)="delete($event , todo?.id)" icon="pi pi-trash"
+                styleClass="p-button-danger"></p-button></td>
+
+          </tr>
+        </ng-template>
+      </p-table>
+    </p>
+  </p-card>
+</div>
